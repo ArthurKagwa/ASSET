@@ -8,7 +8,8 @@ import java.text.ParseException;
 public class User
 {
     //only the admin shall use this program
-     static Scanner scanObj = new Scanner(System.in);
+    public static Scanner scanObj = new Scanner(System.in);
+    public static Scanner scanObj1 = new Scanner(System.in);
     public String firstName;
     public String lastName;
     public String email;
@@ -26,33 +27,33 @@ public class User
 User()
 {
     System.out.println("Enter your first name");
-    this.firstName = scanObj.nextLine();
+    this.firstName = scanObj1.nextLine();
     System.out.println("Enter password");
-    this.password = scanObj.nextLine();
+    this.password = scanObj1.nextLine();
     status=0;
-    System.out.println("Enter your last name");
-    this.lastName = scanObj.nextLine();
-    System.out.println("Enter your email");
-    this.email = scanObj.nextLine();
+    // System.out.println("Enter your last name");
+    // this.lastName = scanObj1.nextLine();
+    // System.out.println("Enter your email");
+    // this.email = scanObj1.nextLine();
     
-    System.out.println("Enter your username");
-    this.username = scanObj.nextLine();
-    System.out.println("Enter your phone number");
-    this.phoneNumber = scanObj.nextLine();
-    System.out.println("Enter your address");
-    this.address = scanObj.nextLine();
-    System.out.println("Enter your date of birth (yyyy-MM-dd)");
-    String dateOfBirthStr = scanObj.nextLine();
+    // System.out.println("Enter your username");
+    // this.username = scanObj1.nextLine();
+    // System.out.println("Enter your phone number");
+    // this.phoneNumber = scanObj1.nextLine();
+    // System.out.println("Enter your address");
+    // this.address = scanObj1.nextLine();
+    // System.out.println("Enter your date of birth (yyyy-MM-dd)");
+    // String dateOfBirthStr = scanObj1.nextLine();
 
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.dateOfBirth = dateFormat.parse(dateOfBirthStr);
-    } catch (ParseException e) {
-        System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
-        System.out.println("Enter your date of birth (yyyy-MM-dd)");
-        dateOfBirthStr = scanObj.nextLine();
+    // try {
+    //     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    //     this.dateOfBirth = dateFormat.parse(dateOfBirthStr);
+    // } catch (ParseException e) {
+    //     System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
+    //     System.out.println("Enter your date of birth (yyyy-MM-dd)");
+    //     dateOfBirthStr = scanObj1.nextLine();
         
-    }
+    // }
 }
 
 static  Admin registerAdmin()
@@ -71,13 +72,13 @@ static  Admin registerAdmin()
     {
         System.out.println("Login started");
         System.out.println("Enter first name;");
-            String fname=scanObj.nextLine();
+            String fname=scanObj1.nextLine();
             System.out.println(adminArrayList.get(0).firstName);
             for (Admin admin : adminArrayList) {
                 if(admin.firstName.equals(fname))
                 {
                     System.out.println("Enter password for" +admin.firstName);
-                    String pass=scanObj.nextLine();
+                    String pass=scanObj1.nextLine();
                     if(admin.password.equals(pass))
                     {
                         System.out.println("SUCCESSFUL LOGIN");
@@ -125,47 +126,9 @@ public static void main(String[] args) {
 }
 }
 
-class Admin extends User
-{
-    public String adminId;
-    public String getAdminId() {
-        return adminId;
-    }
-    public void setAdminId(String adminId) {
-        this.adminId = adminId;
-    }
-    public Admin()
-    {
-        super();
-        System.out.println("Enter your admin id");
-        this.adminId = scanObj.nextLine();
-    }
+
 
  
-      
-}
-
- class Client extends User
-{
-    public String clientId;
-    public double loanAmount;
-    public double interestRate;
-    public double weeklyPayment;
-    public String security;
-    public double securityValue;
-    public int loanDuration;
-    public double totalPayment;
-    public double totalInterest;
-    public String beneficiary;
-    public Client()
-    {
-        super();
-        System.out.println("Enter your client id");
-        this.clientId = scanObj.nextLine();
-    }
-
-
-}
 
 
 
