@@ -13,7 +13,13 @@ class Admin extends User
         System.out.println("Enter your admin id");
         this.adminId = scanObj1.nextLine();
     }
+    public void createClient()
+    {
+        
+    }
 
- 
+    public static void main(String[] args) {
+        
+    }
       
 }
