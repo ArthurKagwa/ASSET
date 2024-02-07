@@ -73,11 +73,10 @@ static  Admin registerAdmin()
         System.out.println("Login started");
         System.out.println("Enter first name;");
             String fname=scanObj1.nextLine();
-            System.out.println(adminArrayList.get(0).firstName);
             for (Admin admin : adminArrayList) {
                 if(admin.firstName.equals(fname))
                 {
-                    System.out.println("Enter password for" +admin.firstName);
+                    System.out.println("Enter password for " +admin.firstName);
                     String pass=scanObj1.nextLine();
                     if(admin.password.equals(pass))
                     {
@@ -122,6 +121,10 @@ public static void main(String[] args) {
      
  
     }
+
+
+
+
 
 }
 }
