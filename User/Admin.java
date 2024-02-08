@@ -87,34 +87,18 @@ public class Admin
    public Admin()
     {
         System.out.println("Enter  first name");
-    this.firstName = scanObj1.nextLine();
-    System.out.println("Enter password");
-    this.password = scanObj1.nextLine();
-    status=0;
+    this.firstName = scanObj1.next();
     System.out.println("Enter last name");
-    this.lastName = scanObj1.nextLine();
-    System.out.println("Enter your admin id");
-        this.adminId = scanObj1.nextLine();
-    System.out.println("Enter email");
-    this.email = scanObj1.nextLine();
-    
+    this.lastName = scanObj1.next();
     System.out.println("Enter username");
-    this.username = scanObj1.nextLine();
-    System.out.println("Enter your phone number");
-    this.phoneNumber = scanObj1.nextLine();
-    System.out.println("Enter your address");
-    this.address = scanObj1.nextLine();
-    System.out.println("Enter your date of birth (yyyy-MM-dd)");
-    String dateOfBirthStr = scanObj1.nextLine();
-
-    try {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        this.dateOfBirth = dateFormat.parse(dateOfBirthStr);
-    } catch (ParseException e) {
-        System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd.");
-        System.out.println("Enter your date of birth (yyyy-MM-dd)");
-        dateOfBirthStr = scanObj1.nextLine();
-            }
+    this.username = scanObj1.next();
+    System.out.println("Enter your admin id");
+        this.adminId = scanObj1.next();
+        System.out.println("Enter email");
+    this.email = scanObj1.next();
+    System.out.println("Create password");
+    this.password = scanObj1.next();
+    status=0;
         
     }
     public void createClient()
@@ -189,7 +173,7 @@ public class Admin
     }
     }
 
-    static  Admin registerAdmin()
+    static  Admin registeAdmin()
     {
         System.out.println("Enter Admin details");
     
@@ -206,17 +190,18 @@ public class Admin
         System.out.println();
         System.out.println("Login started");
         System.out.println("Enter Admin ID or username or email;");
-            String fname=scanObj1.nextLine();
+            String fname=scanObj1.next();
             
             for (Admin admin : adminArrayList) {
                 if(admin.username.equals(fname)||admin.email.equals(fname)||admin.adminId.equals(fname))
                 {
                     System.out.println("Enter password for" +admin.firstName+" "+admin.lastName);
-                    String pass=scanObj1.nextLine();
+                    String pass=scanObj1.next();
                     if(admin.password.equals(pass))
                     {
                         System.out.println("SUCCESSFUL LOGIN");
                         admin.status=1;
+                        break;
                         
                     }
                     else
@@ -226,8 +211,8 @@ public class Admin
                     }
                 }
                 else{
-                    System.out.println("No record found for "+fname);logAdmin(adminArrayList);
-
+                    System.out.println("No record found for "+fname);
+                    break;
                 }
     
             }
@@ -269,7 +254,7 @@ public class Admin
         int weeks=0;
         
         System.out.println("Enter client ID");
-            String clientId=scanObj1.nextLine();
+            String clientId=scanObj1.next();
             for(Client client:Client.clients)
         {
             if(client.getClientId().equals(clientId))
@@ -278,7 +263,7 @@ public class Admin
                 System.out.println("Loan amount: "+client.getLoanAmount());
                 System.out.println("Admin: "+client.getAdmin());
                 System.out.println("Interest rate: "+client.getInterestRate());
-                System.out.println("Weekly payment: "+client.getWeeklyPayment());
+                System.out.println("Weekly payment: "+client.getweeklyInterestPayment());
                 System.out.println("Security: "+client.getSecurity());
                 System.out.println("Security value: "+client.getSecurityValue());
                 System.out.println("Total interest: "+client.getTotalInterest());
@@ -298,7 +283,7 @@ public class Admin
     {
 
         System.out.println("Enter client ID");
-        String clientId=scanObj1.nextLine();
+        String clientId=scanObj1.next();
         for(Client client:Client.clients)
         {
             if(client.getClientId().equals(clientId))
@@ -314,7 +299,7 @@ public class Admin
     public int loanPeriodInWeeks()
     {
         System.out.println("Enter client ID");
-        String clientId=scanObj1.nextLine();
+        String clientId=scanObj1.next();
         int weeks=0;
         for(Client client:Client.clients)
         {
@@ -336,14 +321,21 @@ public class Admin
     
         while(choice==2)
         {
-            admins.add(registerAdmin());
-            System.out.println("Do you want to register another Admin");
-            System.out.println("2 Yes" + "1 No");
-            choice = scanObj.nextInt();
+            admins.add(registeAdmin());
+            System.out.println();
+            System.out.println("Add an Admin?");
+            System.out.println("2. yes     1. no");
+            choice=scanObj1.nextInt();
+
+            
         }
         if(choice==1)
         {
+            System.out.println();
             logAdmin(admins);
+            System.out.println("Do you want to try again");
+            System.out.println("2 Yes" + "1 No");
+            choice = scanObj.nextInt();
          
      
         }
@@ -360,6 +352,8 @@ public class Admin
         int g=scanObj1.nextInt();
         while(g==1)
         {
+            System.out.println();
+            System.out.println();
             
             admins.get(AdminIndex).createClient();
         
@@ -367,22 +361,14 @@ public class Admin
         System.out.println("Enter 1 for yes , 2 for no");
         g=scanObj1.nextInt();
         }
-        System.out.println("Do you want to view a client?");
-        System.out.println("Enter 1 for yes, 2 for no");
-        int j=scanObj1.nextInt();
-        while(j==1)
-        {
-            
-                admins.get(AdminIndex).viewClient();
-            System.out.println("Do you want to view another client?");
-            System.out.println("Enter 1 for yes , 2 for no");
-            j=scanObj1.nextInt();
-        }
+        
         System.out.println("Do you  want to manage a client??");
         System.out.println("Enter 1 for yes, 2 for no");
         int k=scanObj1.nextInt();
         while(k==1)
         {
+            System.out.println();
+            System.out.println();
             
             admins.get(AdminIndex).manageClient();
             System.out.println("Do you  want to manage another client??");

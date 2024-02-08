@@ -22,7 +22,7 @@ public class Client
     private double loanAmount;
     private String Admin;
     private double interestRate;
-    private double weeklyPayment;
+    private double weeklyInterestPayment;
     private String security;
     private double securityValue;
     private double amountExpected;
@@ -31,7 +31,7 @@ public class Client
     }
 
     public void setAmountExpected(int weeks) {
-        this.amountExpected = weeks*this.weeklyPayment;
+        this.amountExpected = this.loanAmount+(weeks*this.weeklyInterestPayment);
     }
 
     //private int loanDuration;
@@ -103,7 +103,7 @@ public class Client
         this.loanAmount=scanObj.nextDouble();
         System.out.println("Enter interest rate:");
         this.interestRate=scanObj.nextDouble();
-        this.weeklyPayment=this.loanAmount*this.interestRate/100;
+        this.weeklyInterestPayment=this.loanAmount*this.interestRate/100;
         System.out.println("Enter security:");
         this.security=scanObj.next();
         System.out.println("Enter security value:");
@@ -160,12 +160,12 @@ public class Client
         this.interestRate = interestRate;
     }
 
-    public double getWeeklyPayment() {
-        return weeklyPayment;
+    public double getweeklyInterestPayment() {
+        return weeklyInterestPayment;
     }
 
-    public void setWeeklyPayment(double weeklyPayment) {
-        this.weeklyPayment = weeklyPayment;
+    public void setweeklyInterestPayment(double weeklyInterestPayment) {
+        this.weeklyInterestPayment = weeklyInterestPayment;
     }
 
     public String getSecurity() {
