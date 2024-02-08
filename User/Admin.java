@@ -135,7 +135,58 @@ public class Admin
             System.out.println("Insufficient Security.");
         }
         
-        
+     
+    }   
+
+    public void updateLoanamount()
+    {
+        System.out.println();
+        System.out.println("Enter the client id");
+        String clientId=scanObj1.next();
+        for(Client client:Client.clients)
+        {
+            if(client.getClientId().equals(clientId))
+        {
+            System.out.println("Enter the new loan amount");
+                double loanAmount=scanObj1.nextDouble();
+                client.setLoanAmount(loanAmount);
+        }
+    }
+    }
+    public void updateInterest()
+    {
+        System.out.println();
+        System.out.println("Enter the client id");
+        String clientId=scanObj1.next();
+        for(Client client:Client.clients)
+        {
+            if(client.getClientId().equals(clientId))
+        {
+            System.out.println("Enter the new  Interest");
+                double loanAmount=scanObj1.nextDouble();
+                client.setInterestRate(loanAmount);
+        }
+    }
+    }
+
+    public void updateDateTaken()
+    {
+        System.out.println("Enter the client id");
+        String clientId=scanObj1.next();
+        for(Client client:Client.clients)
+        {
+            if(client.getClientId().equals(clientId))
+            {
+                System.out.println("Enter the new date in the format yyyy-MM-dd");
+                String date=scanObj1.next();
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    client.setDateTaken(dateFormat.parse(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+    }
     }
 
     static  Admin registerAdmin()
@@ -174,21 +225,52 @@ public class Admin
                         logAdmin(adminArrayList);
                     }
                 }
+                else{
+                    System.out.println("No record found for "+fname);logAdmin(adminArrayList);
+
+                }
     
             }
         }
           
     
-
+        public void manageClient()
+        {
+            System.out.println("Choose an option");
+            System.out.println("1. To enter client payment");
+            System.out.println("2. To change date of loan");
+            System.out.println("3. To change loan amount");
+            System.out.println("4. To change interest rate");
+            System.out.println("5. to view client");
+            System.out.println();
+            int l=scanObj1.nextInt();
+            if(l==1)
+            {
+                admins.get(AdminIndex).enterClientPayment();
+            }
+            else if(l==2)
+            {
+                admins.get(AdminIndex).updateDateTaken();
+            }
+            else if(l==3)
+            {
+                admins.get(AdminIndex).updateLoanamount();
+            }
+            else if(l==4)
+            {
+               admins.get(AdminIndex).updateInterest();
+            }
+            
+        }
 
       
     public void viewClient()
     {
         int weeks=0;
         
-        System.out.println("Enter the client id");
-        String clientId=scanObj1.nextLine();
-        for(Client client:Client.clients)
+        System.out.println("Enter client ID");
+            String clientId=scanObj1.nextLine();
+            for(Client client:Client.clients)
         {
             if(client.getClientId().equals(clientId))
             {
@@ -207,6 +289,7 @@ public class Admin
                  client.setLoanDuration(weeks);
                 System.out.println("Loan duration: "+client.getLoanDuration()+" weeks");
                 client.setLoanDuration(weeks);
+                client.setAmountExpected(weeks);
                 System.out.println("Expected Amount to be paid: "+client.getAmountExpected());
             }
         }
@@ -300,50 +383,11 @@ public class Admin
         int k=scanObj1.nextInt();
         while(k==1)
         {
-            System.out.println("Enter client ID");
-            String clientId=scanObj1.nextLine();
-            for(Client client:Client.clients)
-            {
-                if(client.getClientId().equals(clientId))
-                {
-                    System.out.println("Choose an option");
-            System.out.println("1. To enter client payment");
-            System.out.println("2. To change date of loan");
-            System.out.println("3. To change loan amount");
-            System.out.println("4. To change interest rate");
-            System.out.println();
-            int l=scanObj1.nextInt();
-            if(l==1)
-            {
-                admins.get(AdminIndex).enterClientPayment();
-            }
-            else if(l==2)
-            {
-                System.out.println("Enter the new date in the format yyyy-MM-dd");
-                String date=scanObj1.next();
-                try {
-                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    client.setDateTaken(dateFormat.parse(date));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-            else if(l==3)
-            {
-                System.out.println("Enter the new loan amount");
-                double loanAmount=scanObj1.nextDouble();
-                client.setLoanAmount(loanAmount);
-            }
-            else if(l==4)
-            {
-                System.out.println("Enter the new interest rate");
-                double interestRate=scanObj1.nextDouble();
-                client.setInterestRate(interestRate);
-            }
-                }
-            }
-                    
             
+            admins.get(AdminIndex).manageClient();
+            System.out.println("Do you  want to manage another client??");
+            System.out.println("Enter 1 for yes, 2 for no");
+        k=scanObj1.nextInt();
         }
     }
 }

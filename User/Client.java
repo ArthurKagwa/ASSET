@@ -103,7 +103,7 @@ public class Client
         this.loanAmount=scanObj.nextDouble();
         System.out.println("Enter interest rate:");
         this.interestRate=scanObj.nextDouble();
-        this.weeklyPayment=this.loanAmount*this.interestRate;
+        this.weeklyPayment=this.loanAmount*this.interestRate/100;
         System.out.println("Enter security:");
         this.security=scanObj.next();
         System.out.println("Enter security value:");
